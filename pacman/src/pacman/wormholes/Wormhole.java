@@ -3,8 +3,10 @@ package pacman.wormholes;
 /**
  * Each instance of this class represents a wormhole consists of a departurePortal and an arrivalPortal
  * 
- * @invar | getDeparturePortal() != null
  * @invar | getArrivalPortal() != null
+ * @invar | getArrivalPortal().getWormholes().contains(this)
+ * @invar | getDeparturePortal() != null
+ * @invar | getDeparturePortal().getWormholes().contains(this)
  */
 public class Wormhole {
 
