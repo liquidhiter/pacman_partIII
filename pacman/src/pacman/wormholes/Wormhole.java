@@ -86,7 +86,7 @@ public class Wormhole {
 	 * @post If the new arrival portal equals to the current one then its associated wormholes doesn't change
 	 * 		 otherwise, the associated wormhole of the old arrivalportal should be removed and the new arrivalportal should be associated
 	 * 
-	 * 		 | old(getArrivalPortal()) == newArrivalPortal ? old(arrivalPortal.getWormholes()).contains(this) : 
+	 * 		 | old(getArrivalPortal()) == newArrivalPortal ? arrivalPortal.getWormholes().contains(this) : 
 	 * 		 |												 (!old(getArrivalPortal()).getWormholes().contains(this) && getArrivalPortal().getWormholes().contains(this))
 	 * 
 	 * @post If the new arrival portal equals to the current one then the field of arrivalportal is assumed to not change
@@ -119,7 +119,7 @@ public class Wormhole {
 	 * @post If the new departure portal equals to the current one then its associated wormholes doesn't change
 	 * 		 otherwise, the associated wormhole of the old arrivalportal should be removed and the new departur eportal should be associated
 	 * 
-	 * 		 | old(getDeparturePortal()) == newDeparturePortal ? old(departurePortal.getWormholes()).contains(this) : 
+	 * 		 | old(getDeparturePortal()) == newDeparturePortal ? departurePortal.getWormholes().contains(this) : 
 	 * 		 |												 (!old(getDeparturePortal()).getWormholes().contains(this) && getDeparturePortal().getWormholes().contains(this))
 	 * 
 	 * @post If the new departure portal equals to the current one then the field of departure portal is assumed to not change
