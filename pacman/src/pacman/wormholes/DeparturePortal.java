@@ -9,7 +9,7 @@ import pacman.Square;
  * Each instance of this class represents an ArricalPortal belongs to a wormhole in the entity-relationship of portals and wormholes
  * One arrivalportal can belong to multiple wormholes, while the wormhole can only have one arrivalportal
  * 
- * @invar | getWormholes() == null || getWormholes().stream().allMatch(a -> a.getDeparturePortal() == this)
+ * @invar | getWormholes() != null || getWormholes().stream().allMatch(a -> a.getDeparturePortal() == this)
  * @invar | getSquare() != null
  */
 public class DeparturePortal {
