@@ -13,12 +13,14 @@ public class Wormhole {
 	/**
 	 * @peerObject
 	 * @invar | departurePortal != null
+	 * @invar | departurePortal.wormholes.contains(this)
 	 */
 	private DeparturePortal departurePortal;
 	
 	/**
 	 * @peerObject
 	 * @invar | arrivalPortal != null
+	 * @invar | arrivalPortal.wormholes.contains(this)
 	 */
 	private ArrivalPortal arrivalPortal;
 	
