@@ -17,11 +17,6 @@ public class Maze {
 	private Ghost[] ghosts;
 	private FoodItem[] foodItems;
 	
-//	private DeparturePortal[] departurePortals;
-//	private ArrivalPortal[] arrivalPortals;
-//	
-//	private Wormhole[] wormholes;
-	
 	private List<DeparturePortal> departurePortals = new ArrayList<>();
 	private List<ArrivalPortal> arrivalPortals = new ArrayList<>();
 	private List<Wormhole> wormholes = new ArrayList<>();
@@ -99,24 +94,20 @@ public class Maze {
 	public void movePacMan(Direction direction) {
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
-			if (checkDeparturePortal(newSquare) != null &&  checkDeparturePortal(newSquare).length != 0) {
-				int index = random.nextInt(checkDeparturePortal(newSquare).length);
-				newSquare = checkDeparturePortal(newSquare)[index].getArrivalPortal().getSquare();
-				checkPacManDamage();
+			for (DeparturePortal element : departurePortals) {
+				if (newSquare.equals(element.getSquare())) {
+					if (!element.getWormholes().isEmpty()) {
+						Wormhole[] wormholeAssociated = (Wormhole[]) element.getWormholes().toArray(new Wormhole[element.getWormholes().size()]);
+						int index = random.nextInt(wormholeAssociated.length);
+						newSquare = wormholeAssociated[index].getArrivalPortal().getSquare();
+						checkPacManDamage();
+					}
+				}
 			}
 			pacMan.setSquare(newSquare);
 			checkFoodItemCollision(newSquare);
 			checkPacManDamage();
 		}
-	}
-	
-	public Wormhole[] checkDeparturePortal(Square square) {
-		for (DeparturePortal element : departurePortals) {
-			if (square.equals(element.getSquare())) {
-				return (Wormhole[]) element.getWormholes().toArray(new Wormhole[element.getWormholes().size()]);
-			}
-		}
-		return null;
 	}
 	
 	// so there are different phases for pre conditions

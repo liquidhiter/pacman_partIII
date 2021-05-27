@@ -5,18 +5,22 @@ package pacman.wormholes;
  * 
  * @invar | getDeparturePortal() != null
  * @invar | getArrivalPortal() != null
+ * @invar | getDeparturePortal().getWormholes().contains(this)
+ * @invar | getArrivalPortal().getWormholes().contains(this)
  */
 public class Wormhole {
 
 	/**
 	 * @peerObject
 	 * @invar | departurePortal != null
+	 * @invar | departurePortal.getWormholes().contains(this)
 	 */
 	private DeparturePortal departurePortal;
 	
 	/**
 	 * @peerObject
 	 * @invar | arrivalPortal != null
+	 * @invar | arrivalPortal.getWormholes().contains(this)
 	 */
 	private ArrivalPortal arrivalPortal;
 	
@@ -77,26 +81,23 @@ public class Wormhole {
 	 * 
 	 * @throws IllegalArgumentException | newArrivalPortal == null
 	 * 
-	 * @mutates_properties | this.getArrivalPortal(), this.getArrivalPortal().getWormholes()
+	 * @mutates_properties | this.getArrivalPortal(), newArrivalPortal.getWormholes()
 	 * 
 	 * @post If the new arrival portal equals to the current one then its associated wormholes doesn't change
 	 * 		 otherwise, the associated wormhole of the old arrivalportal should be removed and the new arrivalportal should be associated
 	 * 
-	 * 		 | old(getArrivalPortal()) == newArrivalPortal ? old(arrivalPortal.getWormholes()).contains(this) : 
-	 * 		 |												 (!old(getArrivalPortal()).getWormholes().contains(this) && getArrivalPortal().getWormholes().contains(this))
+	 * 		 | newArrivalPortal == old(getArrivalPortal()) ? getArrivalPortal().getWormholes().contains(this) : 
+	 * 		 |		(!old(getArrivalPortal()).getWormholes().contains(this) && getArrivalPortal().getWormholes().contains(this))
 	 * 
 	 * @post If the new arrival portal equals to the current one then the field of arrivalportal is assumed to not change
 	 * 		 otherwise, the arrivalportal is changed to the new one
 	 * 
-	 * 		 | old(getArrivalPortal()) == newArrivalPortal ? getArrivalPortal() == old(getArrivalPortal()) : (getArrivalPortal() == newArrivalPortal)	 										
+	 * 		 | newArrivalPortal == old(getArrivalPortal()) ? getArrivalPortal() == old(getArrivalPortal()) : (getArrivalPortal() == newArrivalPortal)	 										
 	 */
 	public void setArrivalPortal(ArrivalPortal newArrivalPortal) {
 		if (newArrivalPortal == null) {
 			throw new IllegalArgumentException("`ArrivalPortal` is null");
 		}
-//		if (arrivalPortal != null) {
-//			throw new IllegalArgumentException("there is already one arrivalportal");
-//		}
 		if (newArrivalPortal == this.arrivalPortal) {
 			return;
 		}
@@ -110,26 +111,23 @@ public class Wormhole {
 	 * 
 	 * @throws IllegalArgumentException | newDeparturePortal == null
 	 * 
-	 * @mutates_properties | this.getDeparturePortal(), this.getDeparturePortal().getWormholes()
+	 * @mutates_properties | this.getDeparturePortal(), newDeparturePortal.getWormholes()
 	 * 
 	 * @post If the new departure portal equals to the current one then its associated wormholes doesn't change
 	 * 		 otherwise, the associated wormhole of the old arrivalportal should be removed and the new departur eportal should be associated
 	 * 
-	 * 		 | old(getDeparturePortal()) == newDeparturePortal ? old(departurePortal.getWormholes()).contains(this) : 
-	 * 		 |												 (!old(getDeparturePortal()).getWormholes().contains(this) && getDeparturePortal().getWormholes().contains(this))
+	 * 		 | newDeparturePortal == old(getDeparturePortal()) ? getDeparturePortal().getWormholes().contains(this) : 
+	 * 		 |		(!old(getDeparturePortal()).getWormholes().contains(this) && getDeparturePortal().getWormholes().contains(this))
 	 * 
 	 * @post If the new departure portal equals to the current one then the field of departure portal is assumed to not change
 	 * 		 otherwise, the departureportal is changed to the new one
-	 * 
-	 * 		 | old(getDeparturePortal()) == newDeparturePortal ? getDeparturePortal() == old(getDeparturePortal()) : (getDeparturePortal() == newDeparturePortal)	 	
+	 *
+	 * 		 | newDeparturePortal == old(getDeparturePortal()) ? getDeparturePortal() == old(getDeparturePortal()) : (getDeparturePortal() == newDeparturePortal)	 	
 	 */
 	public void setDeparturePortal(DeparturePortal newDeparturePortal) {
 		if (newDeparturePortal == null) {
 			throw new IllegalArgumentException("`DeparturePortal` is null");
 		}
-//		if (departurePortal != null) {
-//			throw new IllegalArgumentException("there is already one departurePortal");
-//		}
 		if (newDeparturePortal == this.departurePortal) {
 			return;
 		}
