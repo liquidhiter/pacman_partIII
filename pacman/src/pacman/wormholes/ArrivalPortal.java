@@ -82,7 +82,7 @@ public class ArrivalPortal {
 	 * 		 | getWormholesInternal().size() == old(getWormholesInternal()).size() + 1
 	 * @post After adding the newWormhole, the set of wormholes equals to the old set plus with the newly added wormhole
 	 * 	     | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? getWormholesInternal().contains(w) :
-	 * 		 | 													old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 * 		 | 		old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
 	 * 
 	 */
 	void addWormhole(Wormhole newWormhole) {
@@ -100,7 +100,7 @@ public class ArrivalPortal {
 	 * 			| getWormholesInternal().size() == old(getWormholesInternal()).size() - 1
 	 * @post After removing the newWormhole, the set of wormholes equals to the old set minus the newly added wormhole
 	 * 		    | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? !getWormholesInternal().contains(w) :
-	 * 			|												old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 * 			|		old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
 	 */
 	void removeWormhole(Wormhole newWormhole) {
 		if (newWormhole == null) {
