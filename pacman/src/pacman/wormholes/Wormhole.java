@@ -72,8 +72,8 @@ public class Wormhole {
 		}
 		this.arrivalPortal = arrivalPortal;
 		this.departurePortal = departurePortal;
-		arrivalPortal.addWormhole(this);;
-		departurePortal.addWormhole(this);;
+		arrivalPortal.addWormhole(this);
+		departurePortal.addWormhole(this);
 		
 	}
 
@@ -102,9 +102,9 @@ public class Wormhole {
 		if (newArrivalPortal == this.arrivalPortal) {
 			return;
 		}
-		arrivalPortal.removeWormhole(this);;
+		arrivalPortal.removeWormhole(this);
 		this.arrivalPortal = newArrivalPortal;
-		arrivalPortal.addWormhole(this);;
+		arrivalPortal.addWormhole(this);
 	}
 	
 	/**
@@ -132,9 +132,8 @@ public class Wormhole {
 		if (newDeparturePortal == this.departurePortal) {
 			return;
 		}
-		departurePortal.removeWormhole(this);;
+		departurePortal.removeWormhole(this);
 		this.departurePortal = newDeparturePortal;
-		departurePortal.addWormhole(this);;
-		
+		departurePortal.addWormhole(this);
 	}	
 }

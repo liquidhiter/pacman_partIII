@@ -32,27 +32,27 @@ class WormholeTest {
 		assertEquals(square2, portal2.getSquare());
 		
 		Wormhole wormhole1 = new Wormhole(portal2, portal1);
-//		
-//		assertEquals(portal1, wormhole1.getArrivalPortal());
-//		assertEquals(portal2, wormhole1.getDeparturePortal());
-//		
-//		wormhole1.setArrivalPortal(portal1);
-//		assertEquals(portal1, wormhole1.getArrivalPortal());
-//		assertEquals(portal2, wormhole1.getDeparturePortal());
-//		
-//		ArrivalPortal portal3 = new ArrivalPortal(square3);
-//		wormhole1.setArrivalPortal(portal3);
-//		assertEquals(portal3, wormhole1.getArrivalPortal());
-//		assertEquals(portal2, wormhole1.getDeparturePortal());
-//		
-//		wormhole1.setDeparturePortal(portal2);
-//		assertEquals(portal3, wormhole1.getArrivalPortal());
-//		assertEquals(portal2, wormhole1.getDeparturePortal());
-//		
-//		DeparturePortal portal4 = new DeparturePortal(square4);
-//		wormhole1.setDeparturePortal(portal4);
-//		assertEquals(portal3, wormhole1.getArrivalPortal());
-//		assertEquals(portal4, wormhole1.getDeparturePortal());
+		
+		assertEquals(portal1, wormhole1.getArrivalPortal());
+		assertEquals(portal2, wormhole1.getDeparturePortal());
+		
+		wormhole1.setArrivalPortal(portal1);
+		assertEquals(portal1, wormhole1.getArrivalPortal());
+		assertEquals(portal2, wormhole1.getDeparturePortal());
+		
+		ArrivalPortal portal3 = new ArrivalPortal(square3);
+		wormhole1.setArrivalPortal(portal3);
+		assertEquals(portal3, wormhole1.getArrivalPortal());
+		assertEquals(portal2, wormhole1.getDeparturePortal());
+		
+		wormhole1.setDeparturePortal(portal2);
+		assertEquals(portal3, wormhole1.getArrivalPortal());
+		assertEquals(portal2, wormhole1.getDeparturePortal());
+		
+		DeparturePortal portal4 = new DeparturePortal(square4);
+		wormhole1.setDeparturePortal(portal4);
+		assertEquals(portal3, wormhole1.getArrivalPortal());
+		assertEquals(portal4, wormhole1.getDeparturePortal());
 		
 	}
 

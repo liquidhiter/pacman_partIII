@@ -10,7 +10,7 @@ import pacman.Square;
  * One arrivalportal can belong to multiple wormholes, while the wormhole can only have one arrivalportal
  * 
  * @invar | getWormholes() != null
- * @invar | getWormholes().stream().allMatch(a -> a.getDeparturePortal().equals(this))
+ * @invar | getWormholes().stream().allMatch(a -> a != null)
  * @invar | getSquare() != null
  */
 public class DeparturePortal {
@@ -82,9 +82,10 @@ public class DeparturePortal {
 	 * @mutates | this
 	 * @post After adding the newWormhole, the size of the set is increased by one
 	 * 		 | getWormholesInternal().size() == old(getWormholesInternal()).size() + 1
-	 * @post After adding the newWormhole, the set of wormholes equals to the old set plus with the newly added wormhole
-	 * 	     | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? getWormholesInternal().contains(w) :
-	 * 		 | 		old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 * 
+	 * @post | getWormholesInternal().containsAll(old(getWormholesInternal()))
+	 * @post | getWormholesInternal().contains(newWormhole)
+	 * @post | getWormholesInternal().stream().allMatch(e -> old(getWormholesInternal()).contains(e) || e == newWormhole)
 	 * 
 	 */
 	void addWormhole(Wormhole newWormhole) {
@@ -100,9 +101,10 @@ public class DeparturePortal {
 	 * @mutates | this
 	 * @post After removing the newWormhole, the size of the set is decreased by one
 	 * 			| getWormholesInternal().size() == old(getWormholesInternal()).size() - 1
-	 * @post After removing the newWormhole, the set of wormholes equals to the old set minus the newly added wormhole
-	 * 		    | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? !getWormholesInternal().contains(w) :
-	 * 			|		old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 * 
+	 * @post | old(getWormholesInternal()).stream().allMatch(e -> e == newWormhole || getWormholesInternal().contains(e))
+	 * @post | old(getWormholesInternal()).containsAll(getWormholesInternal())
+	 * @post | !getWormholesInternal().contains(newWormhole)
 	 */
 	void removeWormhole(Wormhole newWormhole) {
 		if (newWormhole == null) {
