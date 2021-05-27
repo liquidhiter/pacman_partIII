@@ -10,7 +10,7 @@ import pacman.Square;
  * One arrivalportal can belong to multiple wormholes, while the wormhole can only have one arrivalportal
  * 
  * @invar | getWormholes() != null
- * @invar | getWormholes().stream().allMatch(a -> a.getDeparturePortal() == this)
+ * @invar | getWormholes().stream().allMatch(a -> a.getDeparturePortal().equals(this))
  * @invar | getSquare() != null
  */
 public class DeparturePortal {
@@ -22,11 +22,10 @@ public class DeparturePortal {
 	
 	/**
 	 * @representationObject
-	 * @peerObjects
 	 * @invar | wormholes != null // phase 1 representation invariant
-	 * @invar | wormholes.stream().allMatch(a -> a != null && a.getDeparturePortal() == this) // phase 2 representation invariant
+	 * @invar | wormholes.stream().allMatch(a -> a != null) // phase 2 representation invariant
 	 */
-	Set<Wormhole> wormholes = new HashSet<>();
+	private Set<Wormhole> wormholes = new HashSet<>();
 	
 	
 	/**
@@ -36,6 +35,19 @@ public class DeparturePortal {
 		return this.square;
 	}
 	
+	/**
+	 * Returns this arrivalportal's set of wormholes
+	 * 
+	 * @invar | getWormholesInternal().stream().allMatch(w ->
+	 * 		  |		w.getDeparturePortalInternal().equals(this))
+	 * 
+	 * @post | result != null && result.stream().allMatch(w -> w != null)
+	 * @peerObjects
+	 */
+	Set<Wormhole> getWormholesInternal() {
+		return Set.copyOf(wormholes);
+	}
+	
 	
 	/**
 	 * Return this arrival portal's set of wormholes
@@ -43,7 +55,7 @@ public class DeparturePortal {
 	 * @creates | result
 	 * @peerObjects
 	 * @basic
-	 * @post | result != null
+	 * @post | result != null && result.stream().allMatch(w -> w != null)
 	 */
 	public Set<Wormhole> getWormholes() {
 		return Set.copyOf(wormholes);
@@ -64,4 +76,38 @@ public class DeparturePortal {
 		this.square = square;
 	}
 	
+	/**
+	 * Add the given wormhole to this arrivalPortal's set of wormholes
+	 * @throws IllegalArgumentException | newWormhole == null
+	 * @mutates | this
+	 * @post After adding the newWormhole, the size of the set is increased by one
+	 * 		 | getWormholesInternal().size() == old(getWormholesInternal()).size() + 1
+	 * @post After adding the newWormhole, the set of wormholes equals to the old set plus with the newly added wormhole
+	 * 	     | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? getWormholesInternal().contains(w) :
+	 * 		 | 													old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 * 
+	 */
+	void addWormhole(Wormhole newWormhole) {
+		if (newWormhole == null) {
+			throw new IllegalArgumentException("`wormhole` is null");
+		}
+		wormholes.add(newWormhole);
+	}
+	
+	/**
+	 * Remove the given wormhole from the arrivalPortal's set of wormholes
+	 * @throws IllegalArgumentException | newWormhole == null
+	 * @mutates | this
+	 * @post After removing the newWormhole, the size of the set is decreased by one
+	 * 			| getWormholesInternal().size() == old(getWormholesInternal()).size() - 1
+	 * @post After removing the newWormhole, the set of wormholes equals to the old set minus the newly added wormhole
+	 * 		    | getWormholesInternal().stream().allMatch(w -> w == newWormhole ? !getWormholesInternal().contains(w) :
+	 * 			|												old(getWormholesInternal()).stream().allMatch(o -> o.equals(w)))
+	 */
+	void removeWormhole(Wormhole newWormhole) {
+		if (newWormhole == null) {
+			throw new IllegalArgumentException("`wormhole` is null");
+		}
+		wormholes.remove(newWormhole);
+	}
 }

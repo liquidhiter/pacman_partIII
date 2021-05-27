@@ -10,25 +10,18 @@ package pacman.wormholes;
  */
 public class Wormhole {
 
-	/**
-	 * @peerObject
-	 * @invar | departurePortal != null
-	 * @invar | departurePortal.getWormholes().contains(this)
-	 */
 	private DeparturePortal departurePortal;
 	
-	/**
-	 * @peerObject
-	 * @invar | arrivalPortal != null
-	 * @invar | arrivalPortal.getWormholes().contains(this)
-	 */
 	private ArrivalPortal arrivalPortal;
 	
-//	private Set<Wormhole> wormholes = new HashSet<>();
-	
-//	public Set<Wormhole> getWormholes() {
-//		return Set.copyOf(wormholes);
-//	}
+	/**
+	 * @invar | getDeparturePortalInternal() != null
+	 * @invar | getDeparturePortalInternal().getWormholesInternal().contains(this)
+	 * @peerObject
+	 */
+	DeparturePortal getDeparturePortalInternal() {
+		return this.departurePortal;
+	}
 	
 	/**
 	 * Returns the wormhole's departureportal 
@@ -39,6 +32,14 @@ public class Wormhole {
 		return this.departurePortal;
 	}
 	
+	/**
+	 * @invar | getArrivalPortalInternal() != null
+	 * @invar | getArrivalPortalInternal().getWormholesInternal().contains(this)
+	 * @peerObject
+	 */
+	ArrivalPortal getArrivalPortalInternal() {
+		return this.arrivalPortal;
+	}
 	
 	/**
 	 * Returns the wormhole's arrivalportal
@@ -71,8 +72,8 @@ public class Wormhole {
 		}
 		this.arrivalPortal = arrivalPortal;
 		this.departurePortal = departurePortal;
-		arrivalPortal.wormholes.add(this);
-		departurePortal.wormholes.add(this);
+		arrivalPortal.addWormhole(this);;
+		departurePortal.addWormhole(this);;
 		
 	}
 
@@ -101,9 +102,9 @@ public class Wormhole {
 		if (newArrivalPortal == this.arrivalPortal) {
 			return;
 		}
-		arrivalPortal.wormholes.remove(this);
+		arrivalPortal.removeWormhole(this);;
 		this.arrivalPortal = newArrivalPortal;
-		arrivalPortal.wormholes.add(this);
+		arrivalPortal.addWormhole(this);;
 	}
 	
 	/**
@@ -131,9 +132,9 @@ public class Wormhole {
 		if (newDeparturePortal == this.departurePortal) {
 			return;
 		}
-		departurePortal.wormholes.remove(this);
+		departurePortal.removeWormhole(this);;
 		this.departurePortal = newDeparturePortal;
-		departurePortal.wormholes.add(this);
+		departurePortal.addWormhole(this);;
 		
 	}	
 }
